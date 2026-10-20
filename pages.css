@@ -1,0 +1,23 @@
+/* Extra rules for the multi-page layout. Loaded after style.css. */
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-3)}
+.card{display:flex;flex-direction:column;gap:.6rem;height:100%;padding:var(--space-2);background:var(--bg);border:1px solid var(--line-2);border-top:2px solid var(--accent);transition:border-color var(--transition),box-shadow var(--transition),transform var(--transition)}
+.card:hover,.card:focus-visible{border-color:var(--accent);box-shadow:0 18px 40px rgba(0,0,0,.45);transform:translateY(-3px)}
+.card .frame{border-bottom:3px solid var(--accent);margin-bottom:.4rem}
+.card:hover .frame img{transform:scale(1.04)}
+.card h3{font-size:clamp(1.05rem,1.6vw,1.3rem);font-weight:800;line-height:1.15;letter-spacing:-.02em;overflow-wrap:anywhere}
+.card-label{color:var(--muted);font-family:var(--font-mono);font-size:var(--text-xs)}
+.card-cta{margin-top:auto;padding-top:.6rem;color:var(--accent);font-family:var(--font-mono);font-size:var(--text-xs);letter-spacing:.06em;text-transform:uppercase}
+.card-cta::after{content:" \2192"}
+.member-name{padding-bottom:var(--space-2);font-size:clamp(2.3rem,5vw,4.4rem);font-weight:800;line-height:.96;letter-spacing:-.04em;overflow-wrap:anywhere}
+.member-name::after{content:"";display:block;width:72px;height:3px;margin-top:var(--space-3);background:var(--accent)}
+.archive-head h2{font-family:var(--font-serif);font-size:clamp(2.2rem,4.6vw,3.8rem);font-weight:400;line-height:1;letter-spacing:-.035em}
+.course-title{font-size:var(--text-lg);font-weight:700}
+.archive + .archive{margin-top:var(--space-5)}
+.site-footer .footer-inner{padding:var(--space-3) 0}
+@media (max-width:1060px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.cards{grid-template-columns:1fr}}
+/* ghost numerals now that each member has their own page */
+.portfolio.m-red .member-info::before{content:"01"}
+.portfolio.m-purple .member-info::before{content:"02"}
+.portfolio.m-cyan .member-info::before{content:"03"}
+.portfolio.m-orange .member-info::before{content:"04"}
