@@ -57,7 +57,8 @@ ul{list-style:none}
  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
  body{background:#fff;padding:0;font-size:12.5px}
  .toolbar{display:none}
- .sheet{max-width:none;width:210mm;height:297mm;min-height:0;margin:0;box-shadow:none;grid-template-columns:72mm 1fr;overflow:hidden}
+ .sheet{max-width:none;width:210mm;min-height:297mm;margin:0;box-shadow:none;grid-template-columns:72mm 1fr}
+ .entry{break-inside:avoid}
  .photo{max-width:none}
  .rail{padding:9mm 7mm}
  .main{padding:11mm 10mm 9mm}
