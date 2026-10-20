@@ -21,3 +21,54 @@
 .portfolio.m-purple .member-info::before{content:"02"}
 .portfolio.m-cyan .member-info::before{content:"03"}
 .portfolio.m-orange .member-info::before{content:"04"}
+
+
+/* =========================================================
+   PERFORMANCE OVERRIDES (loaded after style.css)
+   Same look, cheaper to render while scrolling.
+========================================================= */
+
+/* 1. The sticky header repainted a blurred copy of everything scrolling
+      underneath it on every frame. A near-opaque background looks the same. */
+.site-header {
+    background: rgba(7, 8, 10, 0.95);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
+/* 2. Full-screen blur behind the lightbox: same idea, only while open. */
+.lightbox {
+    background: rgba(3, 4, 5, 0.96);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
+/* 3. Phones and touch screens: no scroll-linked reveals on dozens of elements,
+      smaller shadow blur radii. Content simply appears in place. */
+@media (max-width: 900px), (hover: none) {
+    :root {
+        --shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    .section-head,
+    .prose,
+    .archive-head,
+    .course-head,
+    .closing h2 {
+        animation: none;
+        animation-timeline: auto;
+    }
+
+    .hero-text > *,
+    .hero-figure {
+        animation-duration: 400ms;
+        animation-delay: 0s;
+    }
+}
+
+/* 4. Shorter accent wash behind each member profile on phones. */
+@media (max-width: 720px) {
+    .portfolio::after {
+        height: 360px;
+    }
+}
