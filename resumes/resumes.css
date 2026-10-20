@@ -1,0 +1,64 @@
+/* Shared stylesheet for the four resume pages. HTML + CSS only. */
+:root{--accent:#ff4a3d;--ink:#15171b;--soft:#4a4f58;--paper:#fff;--rail:#14161a;--rail-text:#e9ebee;--rail-soft:#a4aab4;
+--serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;--sans:"Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif}
+.is-red{--accent:#ff4a3d}.is-purple{--accent:#a982ff}.is-cyan{--accent:#3fd6ff}.is-orange{--accent:#ff9442}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:#0b0c0f;color:var(--ink);font:15px/1.55 var(--sans);padding:0 0 3rem}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+ul{list-style:none}
+
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem 1.5rem;max-width:210mm;margin:0 auto;padding:1rem 1rem;color:#c8ccd3;font:500 .8rem/1.4 ui-monospace,Menlo,Consolas,monospace}
+.toolbar nav{display:flex;gap:.6rem;flex-wrap:wrap}
+.toolbar a{padding:.5rem .9rem;border:1px solid rgba(255,255,255,.3);text-decoration:none;letter-spacing:.04em;text-transform:uppercase;font-size:.72rem}
+.toolbar a:first-child{background:var(--accent);border-color:var(--accent);color:#0b0c0f;font-weight:700}
+.toolbar a:hover{border-color:var(--accent)}
+.toolbar p{color:#8b919c}
+
+.sheet{display:grid;grid-template-columns:72mm minmax(0,1fr);max-width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);box-shadow:0 30px 80px rgba(0,0,0,.6);border-top:6px solid var(--accent)}
+.rail{background:var(--rail);color:var(--rail-text);padding:9mm 7mm}
+.photo{aspect-ratio:3/4;overflow:hidden;border:2px solid var(--accent);background:#222}
+.photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 18%}
+.rail section{margin-top:8mm}
+.rail h2{margin-bottom:3mm;padding-bottom:1.5mm;border-bottom:1px solid rgba(255,255,255,.22);color:var(--accent);font:700 .72rem/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase}
+.rail li{margin-bottom:2mm;font-size:.84rem;color:var(--rail-text)}
+.contact li{display:grid;gap:.1rem;overflow-wrap:anywhere}
+.contact span{color:var(--rail-soft);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase}
+.contact a{text-decoration:none}
+.contact a:hover{color:var(--accent)}
+.skills li{position:relative;padding-left:.9rem}
+.skills li::before{content:"";position:absolute;left:0;top:.62em;width:.4rem;height:.4rem;background:var(--accent)}
+
+.main{padding:11mm 10mm 9mm 10mm;min-width:0}
+.name{font:700 clamp(1.9rem,4.4vw,2.55rem)/1 var(--serif);letter-spacing:-.01em;text-transform:uppercase;overflow-wrap:anywhere}
+.headline{margin-top:2.5mm;color:var(--soft);font:600 .74rem/1.4 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.1em;text-transform:uppercase}
+.bar{height:3px;width:18mm;margin:5mm 0 2mm;background:var(--accent)}
+.main section{margin-top:6.5mm;break-inside:avoid}
+.main h2{margin-bottom:2.5mm;padding-bottom:1.5mm;border-bottom:1px solid #d5d8de;font:700 .8rem/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;gap:.6rem}
+.main h2::before{content:"";width:.55rem;height:.55rem;background:var(--accent);flex:none}
+.main p{color:#2b2f36;font-size:.9rem}
+.entry{margin-bottom:4mm}
+.entry h3{font-size:.95rem;font-weight:700;color:var(--ink)}
+.entry .where{color:var(--soft);font-size:.82rem}
+.entry ul{margin-top:1.2mm}
+.entry li{position:relative;padding-left:1rem;margin-bottom:.8mm;font-size:.88rem;color:#2b2f36}
+.entry li::before{content:"";position:absolute;left:.15rem;top:.62em;width:.32rem;height:.32rem;background:var(--accent)}
+
+@media (max-width:720px){
+ .sheet{grid-template-columns:1fr;min-height:0}
+ .rail{padding:7mm 6mm 8mm}
+ .photo{max-width:220px}
+ .main{padding:8mm 6mm}
+}
+
+@page{size:A4;margin:0}
+@media print{
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ body{background:#fff;padding:0;font-size:12.5px}
+ .toolbar{display:none}
+ .sheet{max-width:none;width:210mm;height:297mm;min-height:0;margin:0;box-shadow:none;grid-template-columns:72mm 1fr;overflow:hidden}
+ .photo{max-width:none}
+ .rail{padding:9mm 7mm}
+ .main{padding:11mm 10mm 9mm}
+}
