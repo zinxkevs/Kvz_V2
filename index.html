@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Schibsted+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="pages.css">
+<link rel="stylesheet" href="effects.css">
+<link rel="stylesheet" href="members-fx.css">
 </head>
 <body>
 <header class="site-header">
@@ -19,7 +21,17 @@
 </header>
 
 <main>
-<section id="home" class="hero"><div class="container hero-grid">
+<section id="home" class="hero">
+<!-- Decorative background (effects.css): wireframe cubes + circuit traces. Hidden from assistive tech, never clickable. -->
+<div class="hero-fx" aria-hidden="true">
+<span class="fx-cube fx-cube--1"><span class="cube"><i></i><i></i><i></i><i></i></span></span>
+<span class="fx-cube fx-cube--2"><span class="cube"><i></i><i></i><i></i><i></i></span></span>
+<span class="fx-cube fx-cube--3"><span class="cube"><i></i><i></i><i></i><i></i></span></span>
+<span class="fx-cube fx-cube--4"><span class="cube"><i></i><i></i><i></i><i></i></span></span>
+<span class="fx-trace fx-trace--1"></span>
+<span class="fx-trace fx-trace--2"></span>
+</div>
+<div class="container hero-grid">
 <div class="hero-text"><p class="hero-label">BSIT 1A &middot; First year &middot; 2026&ndash;2027</p>
 <h1><span>Four students.</span> <span>One academic journey.</span></h1>
 <p class="hero-intro">A digital record of our first year in the Bachelor of Science in Information Technology. Each of us keeps a personal archive of activities, laboratory work and exams.</p>
@@ -34,13 +46,38 @@
 <p>We are taking the Bachelor of Science in Information Technology. This website contains the academic portfolios of four students: our class activities, quizzes, laboratory work and exams.</p>
 <p>Each member has their own page with a profile, an academic archive for our grading periods, and a resume that can be viewed and downloaded.</p></div>
 </div></section>
-<section id="members" class="section section-surface"><div class="container">
+<section id="members" class="section section-surface has-fx">
+<!-- Same decorative layer as the hero (effects.css). Hovering or focusing a member card tints the cubes and traces in that member's colour. -->
+<div class="hero-fx fx-members" aria-hidden="true">
+<span class="fx-cube fx-cube--1"><span class="cube"><i></i><i></i><i></i><i></i></span></span>
+<span class="fx-cube fx-cube--2"><span class="cube"><i></i><i></i><i></i><i></i></span></span>
+<span class="fx-cube fx-cube--3"><span class="cube"><i></i><i></i><i></i><i></i></span></span>
+<span class="fx-cube fx-cube--4"><span class="cube"><i></i><i></i><i></i><i></i></span></span>
+<span class="fx-trace fx-trace--1"></span>
+<span class="fx-trace fx-trace--2"></span>
+</div>
+<div class="container">
 <header class="section-head section-head-wide"><p class="section-label">02 / Members</p><h2>Four students, four portfolios.</h2><p>Open a member to see their profile, academic archive and resume.</p></header>
-<ul class="cards"><li class="m-red"><a class="card" href="kevinn.html"><span class="frame portrait-frame" data-initials="KA"><img src="images/kevinn/profile.jpg" alt="Profile photo of Kevinn B. Aspillaga" loading="lazy" decoding="async"></span><h3>KEVINN B. ASPILLAGA</h3><p class="card-label">BSIT 1A &middot; First-Year Student</p><span class="card-cta">Open Profile</span></a></li><li class="m-purple"><a class="card" href="guirlyn.html"><span class="frame portrait-frame" data-initials="GB"><img src="images/guirlyn/profile.jpg" alt="Profile photo of Guirlyn Balbin" loading="lazy" decoding="async"></span><h3>GUIRLYN BALBIN</h3><p class="card-label">BSIT 1A &middot; First-Year Student</p><span class="card-cta">Open Profile</span></a></li><li class="m-cyan"><a class="card" href="angela.html"><span class="frame portrait-frame" data-initials="AC"><img src="images/angela/profile.jpg" alt="Profile photo of Angela Mae Caoile" loading="lazy" decoding="async"></span><h3>ANGELA MAE CAOILE</h3><p class="card-label">BSIT 1A &middot; First-Year Student</p><span class="card-cta">Open Profile</span></a></li><li class="m-orange"><a class="card" href="kelly.html"><span class="frame portrait-frame" data-initials="KF"><img src="images/kelly/profile.jpg" alt="Profile photo of Kelly Fajardo" loading="lazy" decoding="async"></span><h3>KELLY FAJARDO</h3><p class="card-label">BSIT 1A &middot; First-Year Student</p><span class="card-cta">Open Profile</span></a></li></ul>
+
+<!-- Member name search (search.js). Hidden until the script runs, so it never appears as a non-working control. Searches the four member names only. -->
+<form class="member-search" role="search" aria-label="Search members by name" hidden>
+<label class="sr-only" for="member-q">Search members by name</label>
+<span class="member-search-field">
+<svg class="icon-search" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="8.5" cy="8.5" r="5.25" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12.6 12.6L17 17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+<input id="member-q" type="search" name="q" placeholder="Search members by name" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-controls="member-cards">
+<button class="member-search-clear" type="button" aria-label="Clear search" hidden>&times;</button>
+</span>
+<button class="btn btn-solid member-search-go" type="submit">Search</button>
+</form>
+<p class="member-search-status" role="status" aria-live="polite" hidden></p>
+<p class="member-empty" hidden>No member matches that name. Try Kevinn, Guirlyn, Angela or Kelly.</p>
+
+<ul class="cards" id="member-cards"><li class="m-red"><a class="card" href="kevinn.html"><span class="frame portrait-frame" data-initials="KA"><img src="images/kevinn/profile.jpg" alt="Profile photo of Kevinn B. Aspillaga" loading="lazy" decoding="async"></span><h3>KEVINN B. ASPILLAGA</h3><p class="card-label">BSIT 1A &middot; First-Year Student</p><span class="card-cta">Open Profile</span></a></li><li class="m-purple"><a class="card" href="guirlyn.html"><span class="frame portrait-frame" data-initials="GB"><img src="images/guirlyn/profile.jpg" alt="Profile photo of Guirlyn Balbin" loading="lazy" decoding="async"></span><h3>GUIRLYN BALBIN</h3><p class="card-label">BSIT 1A &middot; First-Year Student</p><span class="card-cta">Open Profile</span></a></li><li class="m-cyan"><a class="card" href="angela.html"><span class="frame portrait-frame" data-initials="AC"><img src="images/angela/profile.jpg" alt="Profile photo of Angela Mae Caoile" loading="lazy" decoding="async"></span><h3>ANGELA MAE CAOILE</h3><p class="card-label">BSIT 1A &middot; First-Year Student</p><span class="card-cta">Open Profile</span></a></li><li class="m-orange"><a class="card" href="kelly.html"><span class="frame portrait-frame" data-initials="KF"><img src="images/kelly/profile.jpg" alt="Profile photo of Kelly Fajardo" loading="lazy" decoding="async"></span><h3>KELLY FAJARDO</h3><p class="card-label">BSIT 1A &middot; First-Year Student</p><span class="card-cta">Open Profile</span></a></li></ul>
 </div></section>
 </main>
 <footer class="site-footer"><div class="container"><div class="footer-inner">
 <p>BSIT 1A Student Portfolio, Academic Year 2026&ndash;2027</p><a href="index.html">Back to homepage</a>
 </div></div></footer>
+<script src="search.js" defer></script>
 </body>
 </html>

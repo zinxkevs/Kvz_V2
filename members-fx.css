@@ -1,0 +1,255 @@
+/* =========================================================
+   BSIT 1A: MEMBERS EFFECTS + MEMBER NAME SEARCH  (members-fx.css)
+   Load AFTER style.css, pages.css and effects.css.
+   effects.css is not modified; this file only adds to it.
+
+   1. Members section: the same cubes and circuit traces as the
+      hero, and each member card tints them in that member's colour.
+   2. Member name search styling (the form is shown by search.js).
+   3. Small utilities.
+
+   Same performance rules as effects.css: only transform / opacity
+   are animated (nothing new is animated here), everything decorative
+   is pointer-events: none and sits behind the content.
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   1. Members section effects
+--------------------------------------------------------- */
+
+.has-fx {
+    position: relative;
+    overflow: hidden;
+}
+
+/* content stays above the decorative layer */
+
+.has-fx > .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* the wireframes brighten slightly while the pointer is in the section */
+
+.has-fx:hover .hero-fx {
+    --edge: rgba(236, 238, 240, 0.24);
+    --trace: rgba(236, 238, 240, 0.26);
+}
+
+/* hover or keyboard focus on a member card: the cubes and traces take
+   that member's colour. One rule set per member, same pattern each. */
+
+#members:has(.cards > li.m-red:is(:hover, :focus-within)) .hero-fx {
+    --edge: color-mix(in srgb, var(--red, #ff4a3d) 80%, transparent);
+    --face: color-mix(in srgb, var(--red, #ff4a3d) 7%, transparent);
+    --trace: color-mix(in srgb, var(--red, #ff4a3d) 70%, transparent);
+}
+
+#members:has(.cards > li.m-purple:is(:hover, :focus-within)) .hero-fx {
+    --edge: color-mix(in srgb, var(--purple, #a982ff) 80%, transparent);
+    --face: color-mix(in srgb, var(--purple, #a982ff) 7%, transparent);
+    --trace: color-mix(in srgb, var(--purple, #a982ff) 70%, transparent);
+}
+
+#members:has(.cards > li.m-cyan:is(:hover, :focus-within)) .hero-fx {
+    --edge: color-mix(in srgb, var(--cyan, #3fd6ff) 80%, transparent);
+    --face: color-mix(in srgb, var(--cyan, #3fd6ff) 7%, transparent);
+    --trace: color-mix(in srgb, var(--cyan, #3fd6ff) 70%, transparent);
+}
+
+#members:has(.cards > li.m-orange:is(:hover, :focus-within)) .hero-fx {
+    --edge: color-mix(in srgb, var(--orange, #ff9442) 80%, transparent);
+    --face: color-mix(in srgb, var(--orange, #ff9442) 7%, transparent);
+    --trace: color-mix(in srgb, var(--orange, #ff9442) 70%, transparent);
+}
+
+
+/* individual member pages: a top section marked .has-fx plus that member's
+   class (m-red, m-purple, m-cyan, m-orange) gets cubes and traces in the
+   member's own colour, softer than the hover tint on the Members cards */
+
+.has-fx.m-red .hero-fx {
+    --edge: color-mix(in srgb, var(--red, #ff4a3d) 55%, transparent);
+    --face: color-mix(in srgb, var(--red, #ff4a3d) 5%, transparent);
+    --trace: color-mix(in srgb, var(--red, #ff4a3d) 45%, transparent);
+}
+
+.has-fx.m-purple .hero-fx {
+    --edge: color-mix(in srgb, var(--purple, #a982ff) 55%, transparent);
+    --face: color-mix(in srgb, var(--purple, #a982ff) 5%, transparent);
+    --trace: color-mix(in srgb, var(--purple, #a982ff) 45%, transparent);
+}
+
+.has-fx.m-cyan .hero-fx {
+    --edge: color-mix(in srgb, var(--cyan, #3fd6ff) 55%, transparent);
+    --face: color-mix(in srgb, var(--cyan, #3fd6ff) 5%, transparent);
+    --trace: color-mix(in srgb, var(--cyan, #3fd6ff) 45%, transparent);
+}
+
+.has-fx.m-orange .hero-fx {
+    --edge: color-mix(in srgb, var(--orange, #ff9442) 55%, transparent);
+    --face: color-mix(in srgb, var(--orange, #ff9442) 5%, transparent);
+    --trace: color-mix(in srgb, var(--orange, #ff9442) 45%, transparent);
+}
+
+
+/* ---------------------------------------------------------
+   2. Member name search
+--------------------------------------------------------- */
+
+.member-search {
+    display: flex;
+    align-items: stretch;
+    gap: 0.75rem;
+
+    max-width: 560px;
+    margin: 0 0 var(--space-4, 2.5rem);
+}
+
+.member-search[hidden],
+.member-search-status[hidden],
+.member-empty[hidden],
+.member-search-clear[hidden],
+.cards > li[hidden] {
+    display: none;
+}
+
+.member-search-field {
+    position: relative;
+
+    display: flex;
+    flex: 1;
+    align-items: center;
+
+    min-width: 0;
+}
+
+.member-search-field .icon-search {
+    position: absolute;
+    left: 1rem;
+
+    color: var(--muted, #868c97);
+
+    pointer-events: none;
+}
+
+.member-search input {
+    width: 100%;
+    padding: 0.85rem 2.75rem;
+
+    background: var(--bg, #07080a);
+    border: 1px solid var(--line-3, rgba(255, 255, 255, 0.34));
+    border-radius: var(--radius, 2px);
+
+    color: var(--text, #eceef0);
+    font-family: var(--font-mono, ui-monospace, Menlo, Consolas, monospace);
+    font-size: var(--text-sm, 0.875rem);
+    letter-spacing: 0.02em;
+
+    transition: border-color 220ms ease, background 220ms ease;
+}
+
+.member-search input::placeholder {
+    color: var(--muted, #868c97);
+}
+
+.member-search input:hover {
+    border-color: var(--text-soft, #b7bcc5);
+}
+
+.member-search input:focus-visible {
+    border-color: var(--text, #eceef0);
+    outline: 2px solid var(--text, #eceef0);
+    outline-offset: 2px;
+}
+
+/* the browser's own clear icon is replaced by .member-search-clear */
+
+.member-search input::-webkit-search-cancel-button,
+.member-search input::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.member-search-clear {
+    position: absolute;
+    right: 0.4rem;
+
+    display: grid;
+    place-items: center;
+
+    width: 34px;
+    height: 34px;
+
+    background: transparent;
+    border: 0;
+
+    color: var(--text-soft, #b7bcc5);
+    font-size: 1.35rem;
+    line-height: 1;
+
+    cursor: pointer;
+    transition: color 220ms ease;
+}
+
+.member-search-clear:hover,
+.member-search-clear:focus-visible {
+    color: var(--text, #eceef0);
+}
+
+.member-search-go {
+    flex: none;
+
+    cursor: pointer;
+}
+
+.member-search-status {
+    margin: calc(var(--space-3, 1.5rem) * -1) 0 var(--space-3, 1.5rem);
+
+    color: var(--muted, #868c97);
+    font-family: var(--font-mono, ui-monospace, Menlo, Consolas, monospace);
+    font-size: var(--text-xs, 0.75rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.member-empty {
+    padding: var(--space-4, 2.5rem) var(--space-3, 1.5rem);
+
+    border: 1px dashed var(--line-3, rgba(255, 255, 255, 0.34));
+
+    color: var(--text-soft, #b7bcc5);
+    font-size: var(--text-sm, 0.875rem);
+}
+
+@media (max-width: 480px) {
+
+    .member-search {
+        flex-direction: column;
+    }
+
+    .member-search-go {
+        justify-content: center;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   3. Utilities
+--------------------------------------------------------- */
+
+.sr-only {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+
+    border: 0;
+}
